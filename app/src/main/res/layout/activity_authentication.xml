@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.example.mycoffee.authentication.AuthenticationViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".authentication.AuthenticationActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/coffeeImage"
+            android:layout_width="@dimen/logo_size"
+            android:layout_height="@dimen/logo_size"
+            android:src="@drawable/ic_coffee_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/buttonToggleGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:checkedButton="@id/signUpButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/signUpButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up" />
+
+            <Button
+                android:id="@+id/loginButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:drawableStart="@drawable/ic_email_gray"
+            android:drawablePadding="@dimen/small_size"
+            android:paddingStart="@dimen/small_size"
+            android:paddingEnd="@dimen/small_size"
+            android:ems="10"
+            android:hint="@string/e_mail_hint"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/edittext_text_size"
+            android:layout_marginLeft="@dimen/regular_size"
+            android:layout_marginRight="@dimen/regular_size"
+            app:layout_constraintTop_toBottomOf="@+id/buttonToggleGroup" />
+
+        <EditText
+            android:id="@+id/fullNameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:drawableStart="@drawable/ic_person_gray"
+            android:drawablePadding="@dimen/small_size"
+            android:paddingStart="@dimen/small_size"
+            android:paddingEnd="@dimen/small_size"
+            android:ems="10"
+            android:hint="@string/full_name_hint"
+            android:inputType="text"
+            android:textSize="@dimen/edittext_text_size"
+            android:visibility="@{viewmodel.selectedAuthenticationType == 0 ? View.VISIBLE : View.GONE}"
+            android:layout_marginLeft="@dimen/regular_size"
+            android:layout_marginRight="@dimen/regular_size"
+            app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:drawableStart="@drawable/ic_password_gray"
+            android:drawablePadding="@dimen/small_size"
+            android:paddingStart="@dimen/small_size"
+            android:paddingEnd="@dimen/small_size"
+            android:ems="10"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:textSize="@dimen/edittext_text_size"
+            android:layout_marginLeft="@dimen/regular_size"
+            android:layout_marginRight="@dimen/regular_size"
+            app:layout_constraintTop_toBottomOf="@+id/fullNameEditText" />
+
+        <Button
+            android:id="@+id/authenticationButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edittext_height"
+            android:text="@{viewmodel.authenticationButtonText}"
+            android:layout_margin="@dimen/small_size"
+            android:backgroundTint="@color/light_coffee"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

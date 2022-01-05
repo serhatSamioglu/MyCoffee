@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Coffee</string>
+    <string name="login">Giriş yap</string>
+    <string name="sign_up">Üye ol</string>
+    <string name="e_mail_hint">E-posta adresinizi girin</string>
+    <string name="full_name_hint">İsminizi girin</string>
+    <string name="password_hint">Şifrenizi girin</string>
 </resources>
