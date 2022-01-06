@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "462782440536",
+    "project_id": "my-coffee-ceeca",
+    "storage_bucket": "my-coffee-ceeca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462782440536:android:ba43cbc161e3289c83162d",
+        "android_client_info": {
+          "package_name": "com.example.mycoffee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462782440536-2vf8ulbhb79biba1bbr2ahqr0gtoji4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1zSeRyYMsvoW12KGQWpsn06JMAte5wyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462782440536-2vf8ulbhb79biba1bbr2ahqr0gtoji4l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

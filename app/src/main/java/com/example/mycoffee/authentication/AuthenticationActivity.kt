@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.mycoffee.R
 import com.example.mycoffee.databinding.ActivityAuthenticationBinding
+import com.example.mycoffee.services.Firebase
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -46,6 +47,13 @@ class AuthenticationActivity : AppCompatActivity() {
                         viewModel.authenticationButtonText.postValue(resources.getString(R.string.login))
                     }
                 }
+            }
+        }
+
+        binding.authenticationButton.setOnClickListener {
+            when(viewModel.selectedAuthenticationType.value) {
+                SIGN_UP -> viewModel.createUser(this, binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
+                LOG_IN -> viewModel.signInUser(this, binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
             }
         }
     }
