@@ -1,12 +1,14 @@
 package com.example.mycoffee.authentication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.example.mycoffee.CafeListActivity
 import com.example.mycoffee.R
 import com.example.mycoffee.databinding.ActivityAuthenticationBinding
-import com.example.mycoffee.services.Firebase
+import kotlinx.coroutines.flow.collectLatest
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -32,6 +34,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
         setDefaultValues()
         setListener()
+        setObserver()
     }
 
     private fun setListener() {
@@ -58,8 +61,23 @@ class AuthenticationActivity : AppCompatActivity() {
         }
     }
 
+    private fun setObserver() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.authenticationResponse.collectLatest {
+                it?.let {
+                    navigateNewScreen(Intent(applicationContext, CafeListActivity::class.java)) // this yapamadığım için applicationContext verdim
+                }
+            }
+        }
+    }
+
     private fun setDefaultValues() { // TODO: gereksinime göre parametre alan bir fun yapıalbilir
         viewModel.selectedAuthenticationType.postValue(SIGN_UP)
         viewModel.authenticationButtonText.postValue(resources.getString(R.string.sign_up))
+    }
+
+    fun navigateNewScreen(intent: Intent) { // Todo: BaseActivitye taşınabilir
+        startActivity(intent)
+        finish()
     }
 }
