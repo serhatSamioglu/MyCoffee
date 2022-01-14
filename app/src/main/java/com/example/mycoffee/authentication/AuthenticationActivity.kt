@@ -3,12 +3,15 @@ package com.example.mycoffee.authentication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.mycoffee.CafeListActivity
+import com.example.mycoffee.cafelist.CafeListActivity
 import com.example.mycoffee.R
 import com.example.mycoffee.databinding.ActivityAuthenticationBinding
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -56,14 +59,23 @@ class AuthenticationActivity : AppCompatActivity() {
         binding.authenticationButton.setOnClickListener {
             when(viewModel.selectedAuthenticationType.value) {
                 SIGN_UP -> viewModel.createUser(this, binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
-                LOG_IN -> viewModel.signInUser(this, binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
+                LOG_IN -> viewModel.signIn(this, binding.emailEditText.text.toString(), binding.passwordEditText.text.toString())
             }
         }
     }
 
     private fun setObserver() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.authenticationResponse.collectLatest {
+        GlobalScope.launch {
+            viewModel.createUserResponse.collectLatest {
+                it?.let {
+                    navigateNewScreen(Intent(applicationContext, CafeListActivity::class.java)) // this yapamadığım için applicationContext verdim
+                    viewModel.sendUserInfoToDatabase(binding.emailEditText.text.toString(), binding.fullNameEditText.text.toString(), binding.passwordEditText.text.toString())
+                }
+            }
+        }
+
+        GlobalScope.launch {
+            viewModel.signInResponse.collectLatest {
                 it?.let {
                     navigateNewScreen(Intent(applicationContext, CafeListActivity::class.java)) // this yapamadığım için applicationContext verdim
                 }

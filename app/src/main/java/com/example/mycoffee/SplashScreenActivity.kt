@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mycoffee.authentication.AuthenticationActivity
+import com.example.mycoffee.cafelist.CafeListActivity
 import com.example.mycoffee.services.Firebase
 import java.lang.Boolean.FALSE
 import java.lang.Boolean.TRUE

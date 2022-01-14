@@ -2,14 +2,22 @@ package com.example.mycoffee.services
 
 import android.app.Activity
 import android.widget.Toast
+import com.example.mycoffee.dataclass.User
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
 object Firebase {// FirebaseRepository
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance() // laneinit olmadı
+
+    private var starsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("Stars")
+
+    private var usersRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
+
+    private var cafesRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("Cafes")
 
     /*init {
         auth = FirebaseAuth.getInstance() // Todo: Firebase.auth' u önermedi
@@ -39,5 +47,31 @@ object Firebase {// FirebaseRepository
 
     fun signOutUser() {
         auth.signOut()
+    }
+
+    private fun getCurrentUserID(): String? {
+        return auth.currentUser?.uid //todo currentuser singleton icinde tutulabilir
+    }
+
+    suspend fun getStars(): DataSnapshot? {
+        return try {
+            getCurrentUserID()?.let { starsRef.child(it).get().await() }
+        }catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun getCafe(cafeID: String): DataSnapshot? {
+        return try {
+            cafesRef.child(cafeID).get().await()
+        }catch (e: Exception) {
+            null
+        }
+    }
+
+    fun sendUserInfoToDatabase(email: String, fullName: String, password: String) {
+        getCurrentUserID()?.let {
+            usersRef.child(it).setValue(User(it, email, fullName, password)) }
+        // auth.currentUser.displayName = fullName // todo: burayı kullanmak lazım
     }
 }
