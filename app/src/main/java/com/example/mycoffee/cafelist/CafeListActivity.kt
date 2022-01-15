@@ -1,5 +1,6 @@
 package com.example.mycoffee.cafelist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mycoffee.R
 import com.example.mycoffee.databinding.ActivityAuthenticationBinding
 import com.example.mycoffee.databinding.ActivityCafeListBinding
+import com.example.mycoffee.displayqr.DisplayQRActivity
 import com.example.mycoffee.services.Firebase
 import kotlinx.coroutines.flow.collectLatest
 
@@ -24,7 +26,6 @@ class CafeListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTitle("Hoşgeldin Serhat") // todo: base' e taşınabilir
 
         binding = ActivityCafeListBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,6 +35,7 @@ class CafeListActivity : AppCompatActivity() {
 
         setDefaultValues()
         setObserver()
+        setOnClickListener()
     }
 
     private fun setObserver() {
@@ -44,7 +46,20 @@ class CafeListActivity : AppCompatActivity() {
         }
     }
 
+    private fun setOnClickListener() {
+        binding.fab.setOnClickListener {
+            navigateNewScreen(Intent(applicationContext, DisplayQRActivity::class.java))
+        }
+    }
+
     private fun setDefaultValues() {
+        // todo: base' e taşınabilir
+        title = if (!viewModel.getDisplayName().isNullOrEmpty()) {
+            "Hoşgeldin " + viewModel.getDisplayName()
+        } else {
+            "Hoşgeldin"
+        }
+
         binding.cafeList.layoutManager = LinearLayoutManager(this)
         binding.cafeList.setHasFixedSize(true)
     }
@@ -58,5 +73,10 @@ class CafeListActivity : AppCompatActivity() {
         Firebase.signOutUser()
         Toast.makeText(this, "Option Pressed", Toast.LENGTH_SHORT).show()
         return super.onOptionsItemSelected(item)
+    }
+
+    fun navigateNewScreen(intent: Intent) {
+        startActivity(intent)
+        // finish() // Todo: BaseActivitye taşındığında finish() olayı parametre ile kontrol edilebilir
     }
 }

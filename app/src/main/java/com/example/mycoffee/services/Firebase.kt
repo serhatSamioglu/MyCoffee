@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
+import com.google.firebase.auth.UserProfileChangeRequest
 
 object Firebase {// FirebaseRepository
 
@@ -49,7 +50,7 @@ object Firebase {// FirebaseRepository
         auth.signOut()
     }
 
-    private fun getCurrentUserID(): String? {
+    fun getCurrentUserID(): String? {
         return auth.currentUser?.uid //todo currentuser singleton icinde tutulabilir
     }
 
@@ -72,6 +73,10 @@ object Firebase {// FirebaseRepository
     fun sendUserInfoToDatabase(email: String, fullName: String, password: String) {
         getCurrentUserID()?.let {
             usersRef.child(it).setValue(User(it, email, fullName, password)) }
-        // auth.currentUser.displayName = fullName // todo: burayı kullanmak lazım
+            auth.currentUser?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(fullName).build())
+    }
+
+    fun getDisplayName(): String?{
+        return auth.currentUser?.displayName
     }
 }

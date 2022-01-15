@@ -3,7 +3,7 @@ package com.example.mycoffee.cafelist
 import androidx.lifecycle.ViewModel
 import com.example.mycoffee.dataclass.Cafe
 import com.example.mycoffee.dataclass.CafeListItem
-import com.example.mycoffee.dataclass.Star
+import com.example.mycoffee.dataclass.Reward
 import com.example.mycoffee.services.Firebase
 import com.google.firebase.database.DataSnapshot
 import kotlinx.coroutines.GlobalScope
@@ -29,12 +29,12 @@ class CafeListViewModel: ViewModel() {
 
         dataSnapshot?.let { snapshot ->
             for (starSnapshot in snapshot.children){
-                starSnapshot.getValue(Star::class.java)?.let {
+                starSnapshot.getValue(Reward::class.java)?.let {
                     tempCafeListItem.add(CafeListItem(null, it)) // todo: sıralama algoritması eklenmesi lazım
                 }
             }
             for ((index, cafeListItem) in tempCafeListItem.withIndex()) { // todo: returnu bu for bitince yapsa daha iyi olur
-                cafeListItem.star?.coffeeID?.let { coffeeID ->
+                cafeListItem.reward?.coffeeID?.let { coffeeID ->
                     Firebase.getCafe(coffeeID)?.let {  coffeeSnapshot ->
                         coffeeSnapshot.getValue(Cafe::class.java)?.let { cafeObject ->
                             tempCafeListItem[index].cafe = cafeObject
@@ -44,5 +44,9 @@ class CafeListViewModel: ViewModel() {
             }
         }
         return tempCafeListItem // TODO iki listeyi bir obje yapabilriiz veya tek liste iki objeyi tutar
+    }
+
+    fun getDisplayName(): String? {
+        return Firebase.getDisplayName()
     }
 }

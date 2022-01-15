@@ -14,7 +14,6 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        // Firebase.signOutUser()
         when(Firebase.isCurrentUser()){
             TRUE -> {
                 navigateNewScreen(Intent(this, CafeListActivity::class.java))

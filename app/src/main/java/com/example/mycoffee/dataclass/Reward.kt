@@ -1,6 +1,6 @@
 package com.example.mycoffee.dataclass
 
-data class Star(
+data class Reward(
     var coffeeID: String ?= null,
-    var startCount: Int ?= null,
+    var starCount: Int ?= null,
     var giftCount: Int ?= null)

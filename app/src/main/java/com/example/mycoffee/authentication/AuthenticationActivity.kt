@@ -70,6 +70,10 @@ class AuthenticationActivity : AppCompatActivity() {
                 it?.let {
                     navigateNewScreen(Intent(applicationContext, CafeListActivity::class.java)) // this yapamadığım için applicationContext verdim
                     viewModel.sendUserInfoToDatabase(binding.emailEditText.text.toString(), binding.fullNameEditText.text.toString(), binding.passwordEditText.text.toString())
+                    // kullanıcını shared da tutmak gerekiyor.
+                    // CafeListActivitye üye olup gelince firebase den çekmek uzun sürüyor
+                    // putextra ile taşımadım çünkü başka activityde de lazım olabilir
+                    // shareda null çek yapmak lazım silinme veya ulaşılmama ihtimaline karşı
                 }
             }
         }

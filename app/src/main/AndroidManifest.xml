@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCoffee">
         <activity
+            android:name=".displayqr.DisplayQRActivity"
+            android:exported="true" />
+        <activity
             android:name=".authentication.AuthenticationActivity"
             android:exported="true" />
         <activity

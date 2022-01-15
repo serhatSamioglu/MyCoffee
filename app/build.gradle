@@ -55,4 +55,7 @@ dependencies {
     // COROUTINES
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3-native-mt")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+
+    //QR CODE
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 }

@@ -19,7 +19,9 @@ class CafeAdapter(private val cafeListItem : ArrayList<CafeListItem>): RecyclerV
         val currentItem = cafeListItem[position]
 
         holder.cafeName.text = currentItem.cafe?.name
-        holder.giftCount.text = currentItem.star?.giftCount.toString()
+        holder.starCount.text = currentItem.reward?.starCount.toString()
+        holder.requiredStar.text = currentItem.cafe?.requiredStar.toString()
+        holder.giftCount.text = currentItem.reward?.giftCount.toString()
     }
 
     override fun getItemCount(): Int {
@@ -28,6 +30,8 @@ class CafeAdapter(private val cafeListItem : ArrayList<CafeListItem>): RecyclerV
 
     class CafeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val cafeName : TextView = itemView.findViewById(R.id.cafeName)
+        val starCount : TextView = itemView.findViewById(R.id.starCount)
+        val requiredStar : TextView = itemView.findViewById(R.id.requiredStar)
         val giftCount : TextView = itemView.findViewById(R.id.giftCount)
     }
 }

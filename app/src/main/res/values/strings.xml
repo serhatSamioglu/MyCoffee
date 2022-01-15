@@ -6,4 +6,5 @@
     <string name="full_name_hint">İsminizi girin</string>
     <string name="password_hint">Şifrenizi girin</string>
     <string name="settings">Ayarlar</string>
+    <string name="scan_qr">QR Okut</string>
 </resources>

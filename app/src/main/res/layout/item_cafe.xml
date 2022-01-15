@@ -29,9 +29,51 @@
                 android:id="@+id/cafeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="toolsText"
+                tools:text="cafe adı"
                 android:textColor="@color/black"
-                android:textSize="20sp"/>
+                android:textSize="26sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yıldız sayısı: "
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/starCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    tools:text="5"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="/"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/requiredStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    tools:text="15"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -44,8 +86,7 @@
                     android:layout_height="wrap_content"
                     android:text="Hediye sayısı: "
                     android:textColor="@color/black"
-                    android:textSize="26sp"
-                    android:textStyle="bold"/>
+                    android:textSize="20sp"/>
 
                 <TextView
                     android:id="@+id/giftCount"
