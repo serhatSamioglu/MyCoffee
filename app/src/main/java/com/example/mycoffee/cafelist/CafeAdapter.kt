@@ -10,9 +10,11 @@ import com.example.mycoffee.dataclass.CafeListItem
 
 class CafeAdapter(private val cafeListItem : ArrayList<CafeListItem>): RecyclerView.Adapter<CafeAdapter.CafeViewHolder>() {
 
+    private lateinit var mListener : onItemClickListener
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CafeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_cafe, parent, false)
-        return CafeViewHolder(itemView)
+        return CafeViewHolder(itemView, mListener)
     }
 
     override fun onBindViewHolder(holder: CafeViewHolder, position: Int) {
@@ -28,10 +30,23 @@ class CafeAdapter(private val cafeListItem : ArrayList<CafeListItem>): RecyclerV
         return cafeListItem.size
     }
 
-    class CafeViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    class CafeViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
         val cafeName : TextView = itemView.findViewById(R.id.cafeName)
         val starCount : TextView = itemView.findViewById(R.id.starCount)
         val requiredStar : TextView = itemView.findViewById(R.id.requiredStar)
         val giftCount : TextView = itemView.findViewById(R.id.giftCount)
+    }
+
+    interface onItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener) {
+        mListener = listener
     }
 }

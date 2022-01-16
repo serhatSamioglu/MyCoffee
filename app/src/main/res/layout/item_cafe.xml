@@ -98,6 +98,32 @@
                     android:textSize="20sp"/>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detailsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="120dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Detaylar"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="80px"
+                    android:layout_height="80px"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_right_arrow" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>

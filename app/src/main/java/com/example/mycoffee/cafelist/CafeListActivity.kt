@@ -12,17 +12,22 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mycoffee.R
+import com.example.mycoffee.cafedetail.CafeDetailActivity
 import com.example.mycoffee.databinding.ActivityAuthenticationBinding
 import com.example.mycoffee.databinding.ActivityCafeListBinding
+import com.example.mycoffee.dataclass.CafeListItem
 import com.example.mycoffee.displayqr.DisplayQRActivity
 import com.example.mycoffee.services.Firebase
 import kotlinx.coroutines.flow.collectLatest
+import java.io.Serializable
 
 class CafeListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCafeListBinding
 
     private lateinit var viewModel: CafeListViewModel
+
+    private lateinit var tempCafeList: ArrayList<CafeListItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +46,10 @@ class CafeListActivity : AppCompatActivity() {
     private fun setObserver() {
         lifecycleScope.launchWhenStarted {
             viewModel.cafeList.collectLatest {
-                binding.cafeList.adapter = CafeAdapter(it)
+                tempCafeList = it // temp liste olusturmak yerine viewmodelden okumak lazım
+                var cafeAdapter = CafeAdapter(it)
+                binding.cafeList.adapter = cafeAdapter
+                setAdapterOnClickListener(cafeAdapter)
             }
         }
     }
@@ -50,6 +58,16 @@ class CafeListActivity : AppCompatActivity() {
         binding.fab.setOnClickListener {
             navigateNewScreen(Intent(applicationContext, DisplayQRActivity::class.java))
         }
+    }
+
+    private fun setAdapterOnClickListener(cafeAdapter: CafeAdapter) {
+        cafeAdapter.setOnItemClickListener(object : CafeAdapter.onItemClickListener{
+            override fun onItemClick(position: Int) {
+                var intent = Intent(applicationContext, CafeDetailActivity::class.java)
+                intent.putExtra("CafeListItem", tempCafeList[position]) // todo navigationlar base e alınırken putExtraları degisken ile alınabilir
+                startActivity(intent)
+            }
+        })
     }
 
     private fun setDefaultValues() {

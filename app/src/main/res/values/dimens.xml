@@ -6,6 +6,7 @@
     <dimen name="edittext_height">60dp</dimen>
     <dimen name="small_size">12dp</dimen>
     <dimen name="regular_size">16dp</dimen>
+    <dimen name="big_size">16dp</dimen>
     <dimen name="textview_text_size">18sp</dimen>
     <dimen name="zero_size">0dp</dimen>
 </resources>

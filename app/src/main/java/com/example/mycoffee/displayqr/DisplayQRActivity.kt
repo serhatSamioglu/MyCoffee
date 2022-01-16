@@ -28,7 +28,12 @@ class DisplayQRActivity : AppCompatActivity() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
 
+        setDefaultValues()
         displayQRCode()
+    }
+
+    private fun setDefaultValues() {
+        title = getString(R.string.scan_qr)
     }
 
     private fun displayQRCode() {
