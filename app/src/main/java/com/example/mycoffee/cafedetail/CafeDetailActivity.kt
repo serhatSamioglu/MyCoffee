@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.mycoffee.databinding.ActivityCafeDetailBinding
 import com.example.mycoffee.dataclass.CafeListItem
+import com.squareup.picasso.Picasso
 
 class CafeDetailActivity : AppCompatActivity() {
 
@@ -13,7 +14,7 @@ class CafeDetailActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CafeDetailViewModel
 
-    // private lateinit var cafeListItem: CafeListItem
+    private lateinit var cafeListItem: CafeListItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +28,15 @@ class CafeDetailActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         viewModel.cafeListItem.value = getExtras()
+        downloadCafeLogo()
     }
 
     private fun getExtras(): CafeListItem {
-        return intent.getParcelableExtra("CafeListItem")!!
+        cafeListItem = intent.getParcelableExtra("CafeListItem")!!
+        return cafeListItem
+    }
+
+    private fun downloadCafeLogo() {
+        Picasso.get().load(cafeListItem.cafe?.logo).fit().centerInside().into(binding.logo)
     }
 }

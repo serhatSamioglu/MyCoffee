@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCoffee">
         <activity
+            android:name=".scanqr.ScanQRActivity"
+            android:exported="true" />
+        <activity
             android:name=".cafedetail.CafeDetailActivity"
             android:exported="true" />
         <activity

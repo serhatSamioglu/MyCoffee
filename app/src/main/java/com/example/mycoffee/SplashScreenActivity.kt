@@ -3,9 +3,13 @@ package com.example.mycoffee
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.mycoffee.authentication.AuthenticationActivity
 import com.example.mycoffee.cafelist.CafeListActivity
+import com.example.mycoffee.scanqr.ScanQRActivity
 import com.example.mycoffee.services.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.lang.Boolean.FALSE
 import java.lang.Boolean.TRUE
 
@@ -14,12 +18,17 @@ class SplashScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
-        when(Firebase.isCurrentUser()){
-            TRUE -> {
-                navigateNewScreen(Intent(this, CafeListActivity::class.java))
-            }
-            FALSE -> {
-                navigateNewScreen(Intent(this, AuthenticationActivity::class.java))
+        GlobalScope.launch {
+            when (Firebase.isCurrentUser()) {
+                TRUE -> {
+                    when (Firebase.getRole()) {
+                        "customer" -> navigateNewScreen(Intent(this@SplashScreenActivity, CafeListActivity::class.java))
+                        "cashier" -> navigateNewScreen(Intent(this@SplashScreenActivity, ScanQRActivity::class.java))
+                        // else -> navigateNewScreen(Intent(this@SplashScreenActivity, CafeListActivity::class.java))
+                        // rolu null ise ne yapilacagina karar verilecek
+                    }
+                }
+                FALSE -> navigateNewScreen(Intent(this@SplashScreenActivity, AuthenticationActivity::class.java))
             }
         }
     }

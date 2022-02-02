@@ -7,4 +7,6 @@
     <string name="password_hint">Şifrenizi girin</string>
     <string name="settings">Ayarlar</string>
     <string name="scan_qr">QR Okut</string>
+    <string name="give_star">Yıldız Tanımla</string>
+    <string name="use_gift">İkram Kullan</string>
 </resources>

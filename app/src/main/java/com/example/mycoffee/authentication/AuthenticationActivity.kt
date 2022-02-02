@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.mycoffee.cafelist.CafeListActivity
 import com.example.mycoffee.R
 import com.example.mycoffee.databinding.ActivityAuthenticationBinding
+import com.example.mycoffee.scanqr.ScanQRActivity
+import com.example.mycoffee.services.Firebase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -81,7 +83,11 @@ class AuthenticationActivity : AppCompatActivity() {
         GlobalScope.launch {
             viewModel.signInResponse.collectLatest {
                 it?.let {
-                    navigateNewScreen(Intent(applicationContext, CafeListActivity::class.java)) // this yapamadığım için applicationContext verdim
+                    when (Firebase.getRole()) {
+                        "customer" -> navigateNewScreen(Intent(this@AuthenticationActivity, CafeListActivity::class.java))
+                        "cashier" -> navigateNewScreen(Intent(this@AuthenticationActivity, ScanQRActivity::class.java))
+                        // rolu null ise ne yapilacagina karar verilecek
+                    }
                 }
             }
         }

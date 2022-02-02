@@ -9,4 +9,5 @@ data class Cafe(
     var name: String ?= null,
     var address: String ?= null,
     var hours: String ?= null,
-    var requiredStar: Int ?= null) : Parcelable
+    var requiredStar: Int ?= null,
+    var logo: String ?= null) : Parcelable

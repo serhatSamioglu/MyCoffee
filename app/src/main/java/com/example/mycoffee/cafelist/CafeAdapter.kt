@@ -3,10 +3,12 @@ package com.example.mycoffee.cafelist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mycoffee.R
 import com.example.mycoffee.dataclass.CafeListItem
+import com.squareup.picasso.Picasso
 
 class CafeAdapter(private val cafeListItem : ArrayList<CafeListItem>): RecyclerView.Adapter<CafeAdapter.CafeViewHolder>() {
 
@@ -20,6 +22,7 @@ class CafeAdapter(private val cafeListItem : ArrayList<CafeListItem>): RecyclerV
     override fun onBindViewHolder(holder: CafeViewHolder, position: Int) {
         val currentItem = cafeListItem[position]
 
+        Picasso.get().load(currentItem.cafe?.logo).fit().centerInside().into(holder.logo)
         holder.cafeName.text = currentItem.cafe?.name
         holder.starCount.text = currentItem.reward?.starCount.toString()
         holder.requiredStar.text = currentItem.cafe?.requiredStar.toString()
@@ -36,6 +39,7 @@ class CafeAdapter(private val cafeListItem : ArrayList<CafeListItem>): RecyclerV
                 listener.onItemClick(adapterPosition)
             }
         }
+        val logo : ImageView = itemView.findViewById(R.id.logo)
         val cafeName : TextView = itemView.findViewById(R.id.cafeName)
         val starCount : TextView = itemView.findViewById(R.id.starCount)
         val requiredStar : TextView = itemView.findViewById(R.id.requiredStar)

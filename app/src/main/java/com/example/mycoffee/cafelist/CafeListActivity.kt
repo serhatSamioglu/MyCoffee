@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mycoffee.R
+import com.example.mycoffee.authentication.AuthenticationActivity
 import com.example.mycoffee.cafedetail.CafeDetailActivity
 import com.example.mycoffee.databinding.ActivityAuthenticationBinding
 import com.example.mycoffee.databinding.ActivityCafeListBinding
@@ -90,10 +91,12 @@ class CafeListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Firebase.signOutUser()
         Toast.makeText(this, "Option Pressed", Toast.LENGTH_SHORT).show()
+        navigateNewScreen(Intent(applicationContext, AuthenticationActivity::class.java))
+        finish()
         return super.onOptionsItemSelected(item)
     }
 
-    fun navigateNewScreen(intent: Intent) {
+    private fun navigateNewScreen(intent: Intent) {
         startActivity(intent)
         // finish() // Todo: BaseActivitye taşındığında finish() olayı parametre ile kontrol edilebilir
     }
