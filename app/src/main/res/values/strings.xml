@@ -9,4 +9,9 @@
     <string name="scan_qr">QR Okut</string>
     <string name="give_star">Yıldız Tanımla</string>
     <string name="use_gift">İkram Kullan</string>
+    <string name="remove_employee">Çalışanı silmek istediğinden emin misin ?</string>
+    <string name="yes">Evet</string>
+    <string name="cancel">İptal</string>
+    <string name="customer">Müşteri : </string>
+    <string name="cashier">Kasiyer : </string>
 </resources>

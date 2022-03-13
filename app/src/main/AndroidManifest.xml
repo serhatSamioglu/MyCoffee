@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCoffee">
         <activity
+            android:name=".employeelist.EmployeeListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activitylist.ActivityListActivity"
+            android:exported="true" />
+        <activity
             android:name=".scanqr.ScanQRActivity"
             android:exported="true" />
         <activity

@@ -22,7 +22,7 @@ class CafeAdapter(private val cafeListItem : ArrayList<CafeListItem>): RecyclerV
     override fun onBindViewHolder(holder: CafeViewHolder, position: Int) {
         val currentItem = cafeListItem[position]
 
-        Picasso.get().load(currentItem.cafe?.logo).fit().centerInside().into(holder.logo)
+        Picasso.get().load(currentItem.cafe?.logo).fit().centerInside().into(holder.logo)// daha performanslı yapılabilir
         holder.cafeName.text = currentItem.cafe?.name
         holder.starCount.text = currentItem.reward?.starCount.toString()
         holder.requiredStar.text = currentItem.cafe?.requiredStar.toString()

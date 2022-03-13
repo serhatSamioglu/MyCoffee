@@ -6,15 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.example.mycoffee.databinding.ActivityScanQrBinding
 import com.example.mycoffee.dataclass.Reward
 import com.example.mycoffee.services.Firebase
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONException
 
 class ScanQRActivity : AppCompatActivity() {
@@ -25,7 +28,7 @@ class ScanQRActivity : AppCompatActivity() {
 
     private var lastClickedButton: Int? = null
     private var cafeID = MutableStateFlow<String?>(null)
-    private var customerReward = MutableStateFlow<Reward?>(null)
+    private var customerReward = MutableSharedFlow<Reward?>()
     private var requiredStar: Int? = null
     private lateinit var customerID: String
     private var cashierID: String? = null
@@ -51,7 +54,7 @@ class ScanQRActivity : AppCompatActivity() {
 
     private fun getCafeInformation() {
         GlobalScope.launch {
-            cafeID.value = Firebase.getCashierCafeID()
+            cafeID.value = Firebase.getCafeID()
         }
         GlobalScope.launch {
             cafeID.collect { cafeID ->
@@ -78,7 +81,7 @@ class ScanQRActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
-        GlobalScope.launch(Dispatchers.Main) { // TODO: hediye kahvesi yoksa toast mesajı verip coroutineyi sonlandırıyor
+        GlobalScope.launch(Dispatchers.Main) {
             customerReward.collect { customer_reward ->
                 customer_reward?.let {
                     requiredStar?.let { required_star ->
@@ -109,7 +112,7 @@ class ScanQRActivity : AppCompatActivity() {
                 try {
                     customerID = result.contents.toString()
                     GlobalScope.launch {
-                        customerReward.value = Firebase.getCustomerReward(customerID, cafeID.value.toString())
+                        customerReward.emit(Firebase.getCustomerReward(customerID, cafeID.value.toString()))
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()

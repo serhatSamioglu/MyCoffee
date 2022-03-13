@@ -1,6 +1,8 @@
 package com.example.mycoffee.cafelist
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mycoffee.dataclass.Cafe
 import com.example.mycoffee.dataclass.CafeListItem
 import com.example.mycoffee.dataclass.Reward

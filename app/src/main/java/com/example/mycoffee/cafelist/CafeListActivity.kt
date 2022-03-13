@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mycoffee.R
 import com.example.mycoffee.authentication.AuthenticationActivity
 import com.example.mycoffee.cafedetail.CafeDetailActivity
-import com.example.mycoffee.databinding.ActivityAuthenticationBinding
 import com.example.mycoffee.databinding.ActivityCafeListBinding
 import com.example.mycoffee.dataclass.CafeListItem
 import com.example.mycoffee.displayqr.DisplayQRActivity
@@ -81,6 +80,11 @@ class CafeListActivity : AppCompatActivity() {
 
         binding.cafeList.layoutManager = LinearLayoutManager(this)
         binding.cafeList.setHasFixedSize(true)
+
+        binding.cafeListSwipeRefreshLayout.setOnRefreshListener {
+            viewModel.getCafes()
+            binding.cafeListSwipeRefreshLayout.isRefreshing = false
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

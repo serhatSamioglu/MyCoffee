@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.mycoffee.cafelist.CafeListActivity
 import com.example.mycoffee.R
+import com.example.mycoffee.activitylist.ActivityListActivity
 import com.example.mycoffee.databinding.ActivityAuthenticationBinding
 import com.example.mycoffee.scanqr.ScanQRActivity
 import com.example.mycoffee.services.Firebase
@@ -86,6 +87,7 @@ class AuthenticationActivity : AppCompatActivity() {
                     when (Firebase.getRole()) {
                         "customer" -> navigateNewScreen(Intent(this@AuthenticationActivity, CafeListActivity::class.java))
                         "cashier" -> navigateNewScreen(Intent(this@AuthenticationActivity, ScanQRActivity::class.java))
+                        "employer" -> navigateNewScreen(Intent(this@AuthenticationActivity, ActivityListActivity::class.java))
                         // rolu null ise ne yapilacagina karar verilecek
                     }
                 }

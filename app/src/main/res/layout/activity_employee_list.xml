@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/cafeListSwipeRefreshLayout"
+            android:id="@+id/employeeListSwipeRefreshLayout"
             android:layout_width="@dimen/zero_size"
             android:layout_height="@dimen/zero_size"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -16,26 +16,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cafeList"
+                android:id="@+id/employeeList"
                 android:layout_width="@dimen/zero_size"
                 android:layout_height="@dimen/zero_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_cafe"/>
+                tools:listitem="@layout/item_employee"/>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fab"
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/employeeListFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_gravity="end|bottom"
             android:backgroundTint="@color/light_coffee"
-            android:text="@string/scan_qr"
-            tools:text="@string/scan_qr"
-            android:textAllCaps="false"
-            android:textSize="@dimen/textview_text_size"
-            android:layout_margin="@dimen/regular_size"
+            android:src="@drawable/ic_add"
+            android:contentDescription="submit"
+            android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

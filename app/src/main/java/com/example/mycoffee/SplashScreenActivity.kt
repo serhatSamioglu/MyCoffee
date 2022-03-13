@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.mycoffee.activitylist.ActivityListActivity
 import com.example.mycoffee.authentication.AuthenticationActivity
 import com.example.mycoffee.cafelist.CafeListActivity
 import com.example.mycoffee.scanqr.ScanQRActivity
@@ -24,6 +25,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     when (Firebase.getRole()) {
                         "customer" -> navigateNewScreen(Intent(this@SplashScreenActivity, CafeListActivity::class.java))
                         "cashier" -> navigateNewScreen(Intent(this@SplashScreenActivity, ScanQRActivity::class.java))
+                        "employer" -> navigateNewScreen(Intent(this@SplashScreenActivity, ActivityListActivity::class.java))
                         // else -> navigateNewScreen(Intent(this@SplashScreenActivity, CafeListActivity::class.java))
                         // rolu null ise ne yapilacagina karar verilecek
                     }
