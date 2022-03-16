@@ -18,7 +18,7 @@ object Firebase {// FirebaseRepository
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance() // laneinit olmadı
 
-    private var starsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("Stars")
+    private var rewardsRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("Rewards")
 
     private var usersRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
@@ -66,7 +66,7 @@ object Firebase {// FirebaseRepository
 
     suspend fun getStars(): DataSnapshot? {
         return try {
-            getCurrentUserID()?.let { starsRef.child(it).get().await() }
+            getCurrentUserID()?.let { rewardsRef.child(it).get().await() }
         }catch (e: Exception) {
             null
         }
@@ -171,27 +171,26 @@ object Firebase {// FirebaseRepository
     }
 
     fun giveStar(customerID: String, cafeID: String, requiredStar: Int, customerReward: Reward, cashierID: String?) {
-        customerReward.starCount?.let { starCount -> // TODO: ilk basta rewards null olacak sanırım, object içinde default deger verilebilir
-            if (starCount.inc() != requiredStar) {
-                starsRef.child(customerID).child(cafeID).child("starCount").setValue(starCount.inc())
+        customerReward.starCount?.let { star_count ->
+            if (star_count.inc() != requiredStar) { // hediye kahve kazanmıyorsa
+                customerReward.apply {
+                    starCount = star_count.inc()
+                    rewardsRef.child(customerID).child(cafeID).setValue(customerReward)
+                }
             } else {
-                starsRef.child(customerID).child(cafeID).child("starCount").setValue(0)
-                // setGiftCount(customerID, cafeID, customerReward.giftCount?.inc())
-                starsRef.child(customerID).child(cafeID).child("giftCount").setValue(customerReward.giftCount?.inc())
+                customerReward.apply {
+                    starCount = 0
+                    giftCount = customerReward.giftCount?.inc()
+                    rewardsRef.child(customerID).child(cafeID).setValue(customerReward)
+                }
             }
             sendActivityDatabase("star", customerID, cafeID, cashierID)
         }
     }
 
-    /*fun setGiftCount(customerID: String, cafeID: String, newGiftCount: Int?) {
-        newGiftCount?.let { new_gift_count ->
-            starsRef.child(customerID).child(cafeID).child("giftCount").setValue(new_gift_count)
-        }
-    }*/
-
     fun useGift(customerID: String, cafeID: String, giftCount: Int?, cashierID: String?) {
         giftCount?.let { gift_count ->
-            starsRef.child(customerID).child(cafeID).child("giftCount").setValue(gift_count.dec())
+            rewardsRef.child(customerID).child(cafeID).child("giftCount").setValue(gift_count.dec())
             sendActivityDatabase("gift", customerID, cafeID, cashierID)
         }
     }
@@ -214,11 +213,8 @@ object Firebase {// FirebaseRepository
     }
 
     suspend fun getCustomerReward(customerID: String, cafeID: String): Reward? {
-        return try {
-            starsRef.child(customerID).child(cafeID).get().await().getValue(Reward::class.java)
-        }catch (e: Exception) {
-            null
-        }
+        return rewardsRef.child(customerID).child(cafeID).get().await().getValue(Reward::class.java)
+            ?: Reward(cafeID, 0, 0)
     }
 
     suspend fun addEmployee(employeeID: String) {

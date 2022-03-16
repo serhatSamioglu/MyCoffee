@@ -94,7 +94,6 @@ class CafeListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Firebase.signOutUser()
-        Toast.makeText(this, "Option Pressed", Toast.LENGTH_SHORT).show()
         navigateNewScreen(Intent(applicationContext, AuthenticationActivity::class.java))
         finish()
         return super.onOptionsItemSelected(item)

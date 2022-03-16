@@ -5,8 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.example.mycoffee.R
+import com.example.mycoffee.authentication.AuthenticationActivity
 import com.example.mycoffee.databinding.ActivityScanQrBinding
 import com.example.mycoffee.dataclass.Reward
 import com.example.mycoffee.services.Firebase
@@ -123,5 +127,22 @@ class ScanQRActivity : AppCompatActivity() {
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.nav_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Firebase.signOutUser()
+        navigateNewScreen(Intent(applicationContext, AuthenticationActivity::class.java))
+        finish()
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun navigateNewScreen(intent: Intent) {
+        startActivity(intent)
+        // finish() // Todo: BaseActivitye taşındığında finish() olayı parametre ile kontrol edilebilir
     }
 }

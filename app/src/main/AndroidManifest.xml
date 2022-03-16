@@ -11,24 +11,31 @@
         android:theme="@style/Theme.MyCoffee">
         <activity
             android:name=".employeelist.EmployeeListActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".activitylist.ActivityListActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".scanqr.ScanQRActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".cafedetail.CafeDetailActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".displayqr.DisplayQRActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".authentication.AuthenticationActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.SplashScreen">
             <intent-filter>
@@ -39,6 +46,7 @@
         </activity>
         <activity
             android:name=".cafelist.CafeListActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
     </application>
 
