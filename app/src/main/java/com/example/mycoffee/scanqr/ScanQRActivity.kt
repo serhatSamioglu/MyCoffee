@@ -1,14 +1,11 @@
 package com.example.mycoffee.scanqr
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import com.example.mycoffee.R
 import com.example.mycoffee.authentication.AuthenticationActivity
 import com.example.mycoffee.databinding.ActivityScanQrBinding
@@ -21,7 +18,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONException
 
 class ScanQRActivity : AppCompatActivity() {

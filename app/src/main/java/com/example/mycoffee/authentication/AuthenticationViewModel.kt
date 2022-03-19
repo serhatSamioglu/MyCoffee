@@ -1,19 +1,16 @@
 package com.example.mycoffee.authentication
 
 import android.app.Activity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mycoffee.services.Firebase
 import com.google.firebase.auth.AuthResult
-import kotlinx.coroutines.*
+import kotlinx.coroutines.* // ktlint-disable no-wildcard-imports
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
 
-class AuthenticationViewModel: ViewModel() {
+class AuthenticationViewModel : ViewModel() {
 
     var selectedAuthenticationType = MutableLiveData<Int>() // todo: stateflow a geçilebilir
     var authenticationButtonText = MutableLiveData<String>() // todo: stateflow a geçilebilir

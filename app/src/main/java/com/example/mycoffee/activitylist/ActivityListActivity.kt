@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mycoffee.databinding.ActivityListBinding
-import com.example.mycoffee.displayqr.DisplayQRActivity
 import com.example.mycoffee.employeelist.EmployeeListActivity
 import kotlinx.coroutines.flow.collectLatest
 
@@ -43,7 +42,7 @@ class ActivityListActivity : AppCompatActivity() {
     }
 
     private fun setAdapterOnClickListener(activityListAdapter: ActivityListAdapter) {
-        activityListAdapter.setOnItemClickListener(object : ActivityListAdapter.onItemClickListener{
+        activityListAdapter.setOnItemClickListener(object : ActivityListAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 /*var intent = Intent(applicationContext, CafeDetailActivity::class.java)
                 intent.putExtra("CafeListItem", tempCafeList[position]) // todo navigationlar base e alınırken putExtraları degisken ile alınabilir

@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.* // ktlint-disable no-wildcard-imports
 import kotlin.collections.ArrayList
 
-class ActivityListViewModel: ViewModel() {
+class ActivityListViewModel : ViewModel() {
 
     private val _activityList = MutableStateFlow<ArrayList<ActivityObject>>(arrayListOf())
     val activityList = _activityList.asStateFlow() // stateflow sürümden dolayı sorun olabilir
@@ -23,7 +23,7 @@ class ActivityListViewModel: ViewModel() {
         var tempActivityList: ArrayList<ActivityObject> = arrayListOf()
         GlobalScope.launch {
             Firebase.getActivities()?.let { snapshot ->
-                for (activitySnapshot in snapshot.children){
+                for (activitySnapshot in snapshot.children) {
                     activitySnapshot.getValue(ActivityObject::class.java)?.let {
                         tempActivityList.add(it)
                     }

@@ -2,7 +2,6 @@ package com.example.mycoffee.cafedetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.mycoffee.databinding.ActivityCafeDetailBinding
 import com.example.mycoffee.dataclass.CafeListItem

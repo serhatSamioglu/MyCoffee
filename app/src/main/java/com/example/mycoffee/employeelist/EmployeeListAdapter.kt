@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mycoffee.R
 import com.example.mycoffee.dataclass.Employee
 
-class EmployeeListAdapter(private val employeeList : ArrayList<Employee>): RecyclerView.Adapter<EmployeeListAdapter.EmployeeViewHolder>() {
-    private lateinit var mListener : onItemLongClickListener
+class EmployeeListAdapter(private val employeeList: ArrayList<Employee>) : RecyclerView.Adapter<EmployeeListAdapter.EmployeeViewHolder>() {
+    private lateinit var mListener: onItemLongClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmployeeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_employee, parent, false)
@@ -26,17 +26,17 @@ class EmployeeListAdapter(private val employeeList : ArrayList<Employee>): Recyc
         return employeeList.size
     }
 
-    class EmployeeViewHolder(itemView : View, listener: onItemLongClickListener) : RecyclerView.ViewHolder(itemView){
+    class EmployeeViewHolder(itemView: View, listener: onItemLongClickListener) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnLongClickListener {
                 listener.onItemLongClick(adapterPosition)
                 true
             }
         }
-        val employeeName : TextView = itemView.findViewById(R.id.employeeName)
+        val employeeName: TextView = itemView.findViewById(R.id.employeeName)
     }
 
-    interface onItemLongClickListener{
+    interface onItemLongClickListener {
         fun onItemLongClick(position: Int)
     }
 

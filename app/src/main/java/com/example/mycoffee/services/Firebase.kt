@@ -8,13 +8,12 @@ import com.example.mycoffee.dataclass.Reward
 import com.example.mycoffee.dataclass.User
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
+import com.google.firebase.database.* // ktlint-disable no-wildcard-imports
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import com.google.firebase.auth.UserProfileChangeRequest
-import org.w3c.dom.Comment
 
-object Firebase {// FirebaseRepository
+object Firebase { // FirebaseRepository
 
     private var auth: FirebaseAuth = FirebaseAuth.getInstance() // laneinit olmadı
 
@@ -37,7 +36,7 @@ object Firebase {// FirebaseRepository
     suspend fun createUser(activity: Activity, email: String, password: String): AuthResult? {
         return try {
             auth.createUserWithEmailAndPassword(email, password).await()
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()
             null
         }
@@ -46,7 +45,7 @@ object Firebase {// FirebaseRepository
     suspend fun signIn(activity: Activity, email: String, password: String): AuthResult? {
         return try {
             auth.signInWithEmailAndPassword(email, password).await()
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Toast.makeText(activity, e.message, Toast.LENGTH_SHORT).show()
             null
         }
@@ -61,13 +60,13 @@ object Firebase {// FirebaseRepository
     }
 
     fun getCurrentUserID(): String? {
-        return auth.currentUser?.uid //todo currentuser singleton icinde tutulabilir
+        return auth.currentUser?.uid // todo currentuser singleton icinde tutulabilir
     }
 
     suspend fun getStars(): DataSnapshot? {
         return try {
             getCurrentUserID()?.let { rewardsRef.child(it).get().await() }
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             null
         }
     }
@@ -75,7 +74,7 @@ object Firebase {// FirebaseRepository
     suspend fun getActivities(): DataSnapshot? {
         return try {
             getCafeID()?.let { activitiesRef.child("Cafes").child(it).get().await() }
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             null
         }
     }
@@ -131,7 +130,7 @@ object Firebase {// FirebaseRepository
     suspend fun getCafe(cafeID: String): DataSnapshot? {
         return try {
             cafesRef.child(cafeID).get().await()
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             null
         }
     }
@@ -142,22 +141,22 @@ object Firebase {// FirebaseRepository
             auth.currentUser?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(fullName).build())
     }
 
-    fun getDisplayName(): String?{
+    fun getDisplayName(): String? {
         return auth.currentUser?.displayName
     }
 
     suspend fun getRole(): String? {
         return try {
             getCurrentUserID()?.let { usersRef.child(it).child("role").get().await().value.toString() }
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             null
         }
     }
 
     suspend fun getCafeID(): String? {
         return try {
-            getCurrentUserID()?.let { usersRef.child(it).child("cafeID").get().await().value.toString()}
-        }catch (e: Exception) {
+            getCurrentUserID()?.let { usersRef.child(it).child("cafeID").get().await().value.toString() }
+        } catch (e: Exception) {
             null
         }
     }
@@ -165,7 +164,7 @@ object Firebase {// FirebaseRepository
     suspend fun getCashierCafeRequiredStar(cafeID: String): Int? {
         return try {
             cafesRef.child(cafeID).child("requiredStar").get().await().value.toString().toInt()
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             null
         }
     }
@@ -236,7 +235,7 @@ object Firebase {// FirebaseRepository
     suspend fun getFullName(userID: String): String? {
         return try {
             usersRef.child(userID).child("fullName").get().await().value.toString()
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             null
         }
     }
@@ -244,7 +243,7 @@ object Firebase {// FirebaseRepository
     suspend fun getEmployees(): DataSnapshot? {
         return try {
             getCafeID()?.let { employeeRef.child(it).get().await() }
-        }catch (e: Exception) {
+        } catch (e: Exception) {
             null
         }
     }

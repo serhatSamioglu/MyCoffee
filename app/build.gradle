@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-parcelize'
 }
 
+apply from: "../ktlint.gradle"
+
 android {
     compileSdk 31
 

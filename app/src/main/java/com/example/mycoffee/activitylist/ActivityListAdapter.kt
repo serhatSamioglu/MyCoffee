@@ -1,6 +1,5 @@
 package com.example.mycoffee.activitylist
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mycoffee.R
 import com.example.mycoffee.dataclass.ActivityObject
 
-class ActivityListAdapter (private val activityList : ArrayList<ActivityObject>, private val context : ActivityListActivity): RecyclerView.Adapter<ActivityListAdapter.ActivityListViewHolder>() {
+class ActivityListAdapter(private val activityList: ArrayList<ActivityObject>, private val context: ActivityListActivity) : RecyclerView.Adapter<ActivityListAdapter.ActivityListViewHolder>() {
 
-    private lateinit var mListener : onItemClickListener
+    private lateinit var mListener: onItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityListViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_activity, parent, false)
@@ -31,19 +30,19 @@ class ActivityListAdapter (private val activityList : ArrayList<ActivityObject>,
         return activityList.size
     }
 
-    class ActivityListViewHolder(itemView : View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
+    class ActivityListViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
         }
-        val activityType : TextView = itemView.findViewById(R.id.activityType)
-        val customerName : TextView = itemView.findViewById(R.id.customerName)
-        val cashierName : TextView = itemView.findViewById(R.id.cashierName)
-        val activityDate : TextView = itemView.findViewById(R.id.activityDate)
+        val activityType: TextView = itemView.findViewById(R.id.activityType)
+        val customerName: TextView = itemView.findViewById(R.id.customerName)
+        val cashierName: TextView = itemView.findViewById(R.id.cashierName)
+        val activityDate: TextView = itemView.findViewById(R.id.activityDate)
     }
 
-    interface onItemClickListener{
+    interface onItemClickListener {
         fun onItemClick(position: Int)
     }
 

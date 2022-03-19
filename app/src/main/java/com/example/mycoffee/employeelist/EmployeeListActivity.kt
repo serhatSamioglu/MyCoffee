@@ -57,7 +57,7 @@ class EmployeeListActivity : AppCompatActivity() {
     }
 
     private fun setAdapterOnItemLongClickListener(employeeAdapter: EmployeeListAdapter) {
-        employeeAdapter.setOnItemLongClickListener(object : EmployeeListAdapter.onItemLongClickListener{
+        employeeAdapter.setOnItemLongClickListener(object : EmployeeListAdapter.onItemLongClickListener {
             override fun onItemLongClick(position: Int) {
                 showAlertDialog(employeeAdapter, position)
             }

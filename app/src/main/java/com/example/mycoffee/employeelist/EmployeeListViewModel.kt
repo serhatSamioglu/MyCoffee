@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class EmployeeListViewModel: ViewModel() {
+class EmployeeListViewModel : ViewModel() {
     private val _employeeList = MutableStateFlow<ArrayList<Employee>>(arrayListOf())
     val employeeList = _employeeList.asStateFlow() // stateflow sürümden dolayı sorun olabilir
 
@@ -16,7 +16,7 @@ class EmployeeListViewModel: ViewModel() {
         var tempEmployeeList: ArrayList<Employee> = arrayListOf()
         GlobalScope.launch {
             Firebase.getEmployees()?.let { snapshot ->
-                for (employeeSnapshot in snapshot.children){
+                for (employeeSnapshot in snapshot.children) {
 
                     employeeSnapshot.value?.let { employee_FullName ->
                         tempEmployeeList.add(Employee(employeeSnapshot.key, employee_FullName.toString()))

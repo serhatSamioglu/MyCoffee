@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.example.mycoffee.dataclass.CafeListItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class CafeDetailViewModel: ViewModel() {
+class CafeDetailViewModel : ViewModel() {
     var cafeListItem = MutableStateFlow(CafeListItem(null, null))
 }

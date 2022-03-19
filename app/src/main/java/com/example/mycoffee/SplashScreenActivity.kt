@@ -3,7 +3,6 @@ package com.example.mycoffee
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.mycoffee.activitylist.ActivityListActivity
 import com.example.mycoffee.authentication.AuthenticationActivity
 import com.example.mycoffee.cafelist.CafeListActivity

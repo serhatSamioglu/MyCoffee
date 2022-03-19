@@ -3,14 +3,11 @@ package com.example.mycoffee.cafelist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mycoffee.R
 import com.example.mycoffee.authentication.AuthenticationActivity
 import com.example.mycoffee.cafedetail.CafeDetailActivity
@@ -19,7 +16,6 @@ import com.example.mycoffee.dataclass.CafeListItem
 import com.example.mycoffee.displayqr.DisplayQRActivity
 import com.example.mycoffee.services.Firebase
 import kotlinx.coroutines.flow.collectLatest
-import java.io.Serializable
 
 class CafeListActivity : AppCompatActivity() {
 
@@ -61,7 +57,7 @@ class CafeListActivity : AppCompatActivity() {
     }
 
     private fun setAdapterOnClickListener(cafeAdapter: CafeAdapter) {
-        cafeAdapter.setOnItemClickListener(object : CafeAdapter.onItemClickListener{
+        cafeAdapter.setOnItemClickListener(object : CafeAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 var intent = Intent(applicationContext, CafeDetailActivity::class.java)
                 intent.putExtra("CafeListItem", tempCafeList[position]) // todo navigationlar base e alınırken putExtraları degisken ile alınabilir
