@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'kotlin-parcelize'
+    id 'com.google.firebase.crashlytics'
 }
 
 apply from: "../ktlint.gradle"
@@ -55,6 +56,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-database' // kotlin versiyonu calismadi
     implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // COROUTINES
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3-native-mt")
